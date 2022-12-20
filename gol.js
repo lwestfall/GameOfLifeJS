@@ -39,7 +39,7 @@ function initTable()
             var cell = row.insertCell(j);
             cellArr.push(cell);
             cell.onmousedown = (event) => handleCellClick(event);
-            cell.onmouseover = (event) => handleCellClick(event);
+            cell.onmouseover = (event) => handleDrag(event);
         }
     }
 }
@@ -55,6 +55,19 @@ function handleCellClick(event) {
         var wasAlive = aliveBuffer[i][j];
         aliveBuffer[i][j] = wasAlive ? 0 : 1;
         cell.style.backgroundColor = wasAlive ? 'white': 'black';
+    }
+}
+
+function handleDrag(event) {
+    if (event.buttons == 1) {
+        var cell = event.srcElement;
+        var row = cell.parentElement;
+
+        var i = row.rowIndex;
+        var j = cell.cellIndex;
+
+        aliveBuffer[i][j] = 1;
+        cell.style.backgroundColor = 'black';
     }
 }
 
