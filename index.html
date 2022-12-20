@@ -7,6 +7,26 @@
         text-align: center;
       }
 
+      .description-container {
+        display: flex;
+        justify-content: flex-start;
+        display: flex;
+        flex-direction: row;
+        text-align: left;
+      }
+
+      .instructions {
+        width: 50%;
+        margin-left: 3rem;
+        margin-right: 3rem;
+      }
+
+      .about {
+        width: 50%;
+        margin-left: 3rem;
+        margin-right: 3rem;
+      }
+
       table {
         border-collapse: collapse;
         margin-left: auto;
@@ -14,8 +34,8 @@
       }
 
       table > tbody > tr > td {
-        width: 1rem;
-        height: 1rem;
+        width: 0.8rem;
+        height: 0.8rem;
         border: 1px solid;
         user-select: none;
       }
@@ -40,7 +60,7 @@
           id="row-count"
           type="text"
           size="3"
-          value="50"
+          value="40"
           onchange="handleSettingsChange(); initTable()"
         />
         <label for="col-count">Columns:</label>
@@ -48,7 +68,7 @@
           id="col-count"
           type="text"
           size="3"
-          value="50"
+          value="40"
           onchange="handleSettingsChange(); initTable()"
         />
       </div>
@@ -56,6 +76,54 @@
         <button type="button" onclick="handlePlayClick()">Play</button>
         <button type="button" onclick="handlePauseClick()">Pause</button>
         <button type="button" onclick="handleStepClick()">Step Forward</button>
+      </div>
+      <div class="description-container">
+        <div class="instructions">
+          <h2>Instructions:</h2>
+          <ul>
+            <li>
+              Click a cell in the table to toggle it alive or dead (black is
+              alive).
+            </li>
+            <li>
+              You can also click and drag to "paint" living cells quickly.
+            </li>
+            <li>
+              Click the Play button to run the simulation at the speed set in
+              the Time Step input.
+            </li>
+            <li>Click the Pause button to stop the simulation.</li>
+            <li>
+              Click the Step Forward button while paused to advance one frame of
+              the simulation.
+            </li>
+          </ul>
+        </div>
+        <div class="about">
+          <h2>About:</h2>
+          <p>
+            Conway's Game of Life was created by John Conway in 1970. It's a
+            cellular automaton defined by a set of very simple rules from which
+            chaotic and complex structures can emerge. More details about
+            Conway's Game of Life can be found on
+            <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">
+              Wikipedia
+            </a>.
+          </p>
+          <p>The rules can be stated simply as the following, where a neighbor is defined as an adjacent cell in vertical, horizontal, and diagonal directions.
+            <ul>
+              <li>A living cell with two or three living neighbors survives.</li>
+              <li>A dead cell comes to life when there are exactly three living neighbors.</li>
+              <li>A living cell dies if there are more than three or fewer than two living neighbors.</li>
+            </ul>
+          </p>
+          <p>
+            I wrote this implementation of Conway's Game Of Life just for fun. My goal was to write it in pure HTML and vanilla Javascript and to keep it minimal. Bugs can be reported by <a href="https://github.com/lwestfall/GameOfLifeJS/issues" target="_blank">opening an issue</a>.
+          </p>
+          <p>
+            The source code can be found on <a href="https://github.com/lwestfall/GameOfLifeJS" target="_blank">GitHub</a>.
+          </p>
+        </div>
       </div>
     </div>
   </body>
