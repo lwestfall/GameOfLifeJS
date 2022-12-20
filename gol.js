@@ -1,19 +1,19 @@
-var rowCount = 50;
-var colCount = 50;
+var rowCount = 20;
+var colCount = 20;
 
-var rows = [];
-
+var cells = [];
 addEventListener("load", (ev) => {
     var tableBody = document.getElementById('gol-table-body');
 
     for (var i = 0; i < rowCount; i++) {
-        var row = document.createElement('tr');
-        rows.push(row);
+        var cellArr = [];
+        cells.push(cellArr);
 
-        tableBody.insertRow(row);
+        var row = tableBody.insertRow(i);
 
         for (var j = 0; j < colCount; j++) {
-            row.insertCell(j);
+            var cell = row.insertCell(j);
+            cellArr.push(cell);
         }
     }
 });
