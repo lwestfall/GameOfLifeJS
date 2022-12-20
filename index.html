@@ -3,6 +3,10 @@
     <script src="gol.js"></script>
     <title>Game Of Life (JS)</title>
     <style>
+      .text-center {
+        text-align: center;
+      }
+
       table {
         border-collapse: collapse;
         margin-left: auto;
@@ -21,6 +25,37 @@
       <table id="gol-table">
         <tbody id="gol-table-body"></tbody>
       </table>
+      <div class="text-center">
+        <label for="time-step">Time Step (seconds):</label>
+        <input
+          id="time-step"
+          type="text"
+          size="3"
+          value="0.1"
+          onchange="handleSettingsChange()"
+        />
+        <label for="row-count">Rows:</label>
+        <input
+          id="row-count"
+          type="text"
+          size="3"
+          value="50"
+          onchange="handleSettingsChange(); initTable()"
+        />
+        <label for="col-count">Columns:</label>
+        <input
+          id="col-count"
+          type="text"
+          size="3"
+          value="50"
+          onchange="handleSettingsChange(); initTable()"
+        />
+      </div>
+      <div class="text-center">
+        <button type="button" onclick="handlePlayClick()">Play</button>
+        <button type="button" onclick="handlePauseClick()">Pause</button>
+        <button type="button" onclick="handleStepClick()">Step Forward</button>
+      </div>
     </div>
   </body>
 </html>
