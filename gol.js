@@ -38,21 +38,24 @@ function initTable()
         for (var j = 0; j < colCount; j++) {
             var cell = row.insertCell(j);
             cellArr.push(cell);
-            cell.onclick = (event) => handleCellClick(event);
+            cell.onmousedown = (event) => handleCellClick(event);
+            cell.onmouseover = (event) => handleCellClick(event);
         }
     }
 }
 
 function handleCellClick(event) {
-    var cell = event.srcElement;
-    var row = cell.parentElement;
+    if (event.buttons == 1) {
+        var cell = event.srcElement;
+        var row = cell.parentElement;
 
-    var i = row.rowIndex;
-    var j = cell.cellIndex;
+        var i = row.rowIndex;
+        var j = cell.cellIndex;
 
-    var wasAlive = aliveBuffer[i][j];
-    aliveBuffer[i][j] = wasAlive ? 0 : 1;
-    cell.style.backgroundColor = wasAlive ? 'white': 'black';
+        var wasAlive = aliveBuffer[i][j];
+        aliveBuffer[i][j] = wasAlive ? 0 : 1;
+        cell.style.backgroundColor = wasAlive ? 'white': 'black';
+    }
 }
 
 function handleSettingsChange() {
