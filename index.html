@@ -3,8 +3,9 @@
     <script src="gol.js"></script>
     <title>Game Of Life (JS)</title>
     <style>
-      .text-center {
+      .control-row {
         text-align: center;
+        margin: 5px 0 5px 0;
       }
 
       .description-container {
@@ -34,8 +35,8 @@
       }
 
       table > tbody > tr > td {
-        width: 0.8rem;
-        height: 0.8rem;
+        width: 0.6rem;
+        height: 0.6rem;
         border: 1px solid;
         user-select: none;
       }
@@ -46,7 +47,7 @@
       <table id="gol-table">
         <tbody id="gol-table-body"></tbody>
       </table>
-      <div class="text-center">
+      <div class="control-row">
         <label for="time-step">Time Step (seconds):</label>
         <input
           id="time-step"
@@ -60,7 +61,7 @@
           id="row-count"
           type="text"
           size="3"
-          value="40"
+          value="50"
           onchange="handleSettingsChange(); initTable()"
         />
         <label for="col-count">Columns:</label>
@@ -68,14 +69,25 @@
           id="col-count"
           type="text"
           size="3"
-          value="40"
+          value="80"
           onchange="handleSettingsChange(); initTable()"
         />
+        <label for="density">Randomize Density (%):</label>
+        <input
+          id="density"
+          type="text"
+          size="3"
+          value="20"
+        />
       </div>
-      <div class="text-center">
-        <button type="button" onclick="handlePlayClick()">Play</button>
-        <button type="button" onclick="handlePauseClick()">Pause</button>
-        <button type="button" onclick="handleStepClick()">Step Forward</button>
+      <div class="control-row">
+        <button type="button" id="play" onclick="handlePlayClick()">Play</button>
+        <button type="button" id="pause" onclick="handlePauseClick()">Pause</button>
+        <button type="button" id="step" onclick="handleStepClick()">Step Forward</button>
+      </div>
+      <div class="control-row">
+        <button type="button" onclick="handleClearClick()">Clear</button>
+        <button type="button" onclick="handleRandomizeClick()">Randomize</button>
       </div>
       <div class="description-container">
         <div class="instructions">
@@ -96,6 +108,12 @@
             <li>
               Click the Step Forward button while paused to advance one frame of
               the simulation.
+            </li>
+            <li>
+              Click the Clear button to kill all cells.
+            </li>
+            <li>
+              Click the Randomize button to randomly select living cells based on the Randomize Density (the likelihood for a given cell to come to life).
             </li>
           </ul>
         </div>

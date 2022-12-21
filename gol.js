@@ -9,6 +9,11 @@ var tableBody;
 var rowCountInput;
 var colCountInput;
 var timeStepSecondsInput;
+var densityInput;
+
+var play;
+var pause;
+var step;
 
 var intervalId;
 
@@ -17,6 +22,14 @@ addEventListener("load", (ev) => {
     rowCountInput = document.getElementById('row-count');
     colCountInput = document.getElementById('col-count');
     timeStepSecondsInput = document.getElementById('time-step');
+    densityInput = document.getElementById('density');
+
+    play = document.getElementById('play');
+    pause = document.getElementById('pause');
+    step = document.getElementById('step');
+
+    pause.disabled = true;
+
     handleSettingsChange();
     initTable();
 });
@@ -72,6 +85,8 @@ function handleDrag(event) {
 }
 
 function handleSettingsChange() {
+    handlePauseClick();
+
     rowCount = rowCountInput.value;
     colCount = colCountInput.value;
     timeStepSeconds = timeStepSecondsInput.value;
@@ -134,17 +149,25 @@ function getNextState(rowIndex, colIndex) {
 }
 
 function handlePlayClick() {
+    play.disabled = true;
+    step.disabled = true;
+
     if (intervalId == null) {
         tick();
         intervalId = setInterval(() => tick(), timeStepSeconds * 1000);
+        pause.disabled = false;
     }
 }
 
 function handlePauseClick() {
+    pause.disabled = true;
+
     if (intervalId != null)
     {
         clearInterval(intervalId);
         intervalId = null;
+        play.disabled = false;
+        step.disabled = false;
     }
 }
 
@@ -152,5 +175,43 @@ function handleStepClick() {
     if (intervalId == null)
     {
         tick();
+    }
+}
+
+function handleClearClick() {
+    handlePauseClick();
+
+    aliveBuffer = [];
+
+    for (var i = 0; i < rowCount; i++) {
+        var row = tableBody.rows.item(i);
+        aliveBuffer.push(new Array(colCount).fill(0));
+
+        for (var j = 0; j < colCount; j++) {
+            var cell = row.cells.item(j);
+            cell.style.backgroundColor = 'white';
+        }
+    }
+}
+
+function handleRandomizeClick() {
+    handlePauseClick();
+
+    aliveBuffer = [];
+
+    var density = densityInput.value / 100;
+
+    for (var i = 0; i < rowCount; i++) {
+        var row = tableBody.rows.item(i);
+        aliveBuffer.push(new Array(colCount).fill(0));
+
+        for (var j = 0; j < colCount; j++) {
+            var random = Math.random();
+            var alive = random < density;
+            aliveBuffer[i][j] = alive;
+
+            var cell = row.cells.item(j);
+            cell.style.backgroundColor = alive ? 'black' : 'white';
+        }
     }
 }
