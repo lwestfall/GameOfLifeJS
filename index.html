@@ -3,9 +3,18 @@
     <script src="gol.js"></script>
     <title>Game Of Life (JS)</title>
     <style>
+      body {
+        background-color: #ffbe5c;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
       .control-row {
         text-align: center;
         margin: 5px 0 5px 0;
+      }
+
+      .input-grp {
+        margin: 0 1rem 0 1rem;
       }
 
       .description-container {
@@ -26,6 +35,7 @@
         width: 50%;
         margin-left: 3rem;
         margin-right: 3rem;
+        font-size: 0.9rem;
       }
 
       table {
@@ -48,37 +58,45 @@
         <tbody id="gol-table-body"></tbody>
       </table>
       <div class="control-row">
-        <label for="time-step">Time Step (seconds):</label>
-        <input
-          id="time-step"
-          type="text"
-          size="3"
-          value="0.1"
-          onchange="handleSettingsChange()"
-        />
-        <label for="row-count">Rows:</label>
-        <input
-          id="row-count"
-          type="text"
-          size="3"
-          value="50"
-          onchange="handleSettingsChange(); initTable()"
-        />
-        <label for="col-count">Columns:</label>
-        <input
-          id="col-count"
-          type="text"
-          size="3"
-          value="80"
-          onchange="handleSettingsChange(); initTable()"
-        />
-        <label for="density">Randomize Density (%):</label>
-        <input
-          id="density"
-          type="text"
-          size="3"
-          value="20"
-        />
+        <span class="input-grp">
+          <label for="time-step">Time Step (seconds):</label>
+          <input
+            id="time-step"
+            type="text"
+            size="3"
+            value="0.1"
+            onchange="handleSettingsChange()"
+          />
+        </span>
+        <span class="input-grp">
+          <label for="row-count">Rows:</label>
+          <input
+            id="row-count"
+            type="text"
+            size="3"
+            value="50"
+            onchange="handleSettingsChange(); initTable()"
+          />
+        </span>
+        <span class="input-grp">
+          <label for="col-count">Columns:</label>
+          <input
+            id="col-count"
+            type="text"
+            size="3"
+            value="80"
+            onchange="handleSettingsChange(); initTable()"
+          />
+        </span>
+        <span class="input-grp">
+          <label for="density">Randomize Density (%):</label>
+          <input
+            id="density"
+            type="text"
+            size="3"
+            value="20"
+          />
+        </span>
       </div>
       <div class="control-row">
         <button type="button" id="play" onclick="handlePlayClick()">Play</button>

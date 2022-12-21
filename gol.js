@@ -15,6 +15,9 @@ var play;
 var pause;
 var step;
 
+var livingColor = '#000000';
+var deadColor = '#ffffff';
+
 var intervalId;
 
 addEventListener("load", (ev) => {
@@ -51,6 +54,7 @@ function initTable()
         for (var j = 0; j < colCount; j++) {
             var cell = row.insertCell(j);
             cellArr.push(cell);
+            cell.style.backgroundColor = deadColor;
             cell.onmousedown = (event) => handleCellClick(event);
             cell.onmouseover = (event) => handleDrag(event);
         }
@@ -67,7 +71,7 @@ function handleCellClick(event) {
 
         var wasAlive = aliveBuffer[i][j];
         aliveBuffer[i][j] = wasAlive ? 0 : 1;
-        cell.style.backgroundColor = wasAlive ? 'white': 'black';
+        cell.style.backgroundColor = wasAlive ? deadColor: livingColor;
     }
 }
 
@@ -80,7 +84,7 @@ function handleDrag(event) {
         var j = cell.cellIndex;
 
         aliveBuffer[i][j] = 1;
-        cell.style.backgroundColor = 'black';
+        cell.style.backgroundColor = livingColor;
     }
 }
 
@@ -110,7 +114,7 @@ function tick() {
         for (var j = 0; j < colCount; j++) {
             nextState[i][j] = getNextState(i, j);
             var cell = row.cells.item(j);
-            cell.style.backgroundColor = nextState[i][j] ? 'black': 'white';
+            cell.style.backgroundColor = nextState[i][j] ? livingColor: deadColor;
         }
     }
 
@@ -189,7 +193,7 @@ function handleClearClick() {
 
         for (var j = 0; j < colCount; j++) {
             var cell = row.cells.item(j);
-            cell.style.backgroundColor = 'white';
+            cell.style.backgroundColor = deadColor;
         }
     }
 }
@@ -211,7 +215,7 @@ function handleRandomizeClick() {
             aliveBuffer[i][j] = alive;
 
             var cell = row.cells.item(j);
-            cell.style.backgroundColor = alive ? 'black' : 'white';
+            cell.style.backgroundColor = alive ? livingColor : deadColor;
         }
     }
 }
